@@ -1,0 +1,52 @@
+.center {
+    margin:  auto;
+    width: 80%;
+    margin-top: 80px;
+    border: 25px solid rgba(0, 0, 0, 0.01);
+    border-radius: 10px; 
+    background: rgba(0, 0, 0, 0.4)
+}
+
+h4{
+    font-size: 10px;
+}
+
+#logo{
+    width: 130px;
+    border-radius: 100px;
+    
+}
+label {
+    font-size: 18px;
+}
+
+body{
+    background-image: url("../image/books.jpg")
+}
+
+@media screen and (min-width:700px) {
+    /* reglas CSS */
+    .center {
+        margin:  auto;
+        width: 60%;
+        margin-top: 100px;
+    }
+
+    label {
+        font-size: 22px;
+    }
+}
+@media screen and (min-width:1024px) {
+    /* reglas CSS */
+    .center {
+        margin:  auto;
+        width: 40%;
+        margin-top: 100px;
+    }
+
+    label {
+        font-size: 22px;
+    }
+
+}
+
