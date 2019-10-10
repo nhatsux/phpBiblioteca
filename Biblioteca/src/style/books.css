@@ -1,0 +1,39 @@
+
+
+@media (min-width: 34em) {
+    .card-columns {
+        -webkit-column-count:1;
+        -moz-column-count:1;
+        column-count:1;
+    }
+}
+
+
+body{
+    align-items: center;
+}
+
+.hide {
+    display: none;
+}
+
+#deck{
+    border: 28px solid transparent
+}
+.title{
+    font-size: 13px;
+    font-weight: bold;
+}
+.info{
+    font-size: 12px;
+}
+
+
+.card{
+    max-width: 350px;
+}
+p{
+    line-height: 1.2;
+    margin:3% 0;
+}
+

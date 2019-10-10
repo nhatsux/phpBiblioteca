@@ -1,0 +1,10 @@
+ul a {
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+ul {
+    list-style-type: none;
+    height: auto;
+  }
