@@ -8,6 +8,11 @@
     }
 }
 
+.navbar{
+    position:fixed;
+    z-index:1;
+    width:100%;
+}
 
 body{
     align-items: center;
@@ -36,4 +41,32 @@ p{
     line-height: 1.2;
     margin:3% 0;
 }
+
+#addBook{
+    align-items: center;
+    border-radius: 50%;
+    padding: 0;
+    right: 5%;
+    z-index:1;
+    position: fixed;;
+    top:80%;
+}
+
+#addBook img {
+    width: 50px;
+}
+.nav-item img {
+    width: 30px;
+}
+.btn img {
+    width: 20px;
+}
+.nav-link{
+    font-size: 20px;
+}
+
+.form-group {
+    align-items: center;
+}
+
 

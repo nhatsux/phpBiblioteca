@@ -9,12 +9,16 @@
     <link rel="stylesheet" href="../src/style/books.css">
     <link rel="stylesheet" href="../src/style/menu.css">
     <script src="../src/jquery-3.3.1.slim.min.js"></script>
+    <script src="../src/bootstrap.min.js"></script>
+    <script src="../src/popper.min.js"></script>
+
     <script src="../src/sweetalert.min.js"></script>
     <script type="module" src="../src/js/books.js"  type="text/javascript"></script>
+    <script type="module" src="../src/js/addBooks.js" type="text/javascript"></script>
 
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position:fixed;z-index:1;width:100%">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,14 +27,15 @@
 
   <div class="collapse navbar-collapse" id="navbarToggler">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      <li class="nav-item">
+       
+        <a class="nav-link" href="#"><img  src="../src/image/icons/book.png"> Libros</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#"><img  src="../src/image/icons/student.png"> Alumnos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a class="nav-link" href="#"><img  src="../src/image/icons/loan.png"> Prestamos</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
@@ -39,10 +44,6 @@
     </form>
   </div>
 </nav>
-
-
-
-
    <div class = "container-fluid ">
        <div class= "d-flex justify-content-center ">
             <div  class=" card-columns mt-5" id="deck">
@@ -57,5 +58,10 @@
             </nav>
        </div>
    </div>
+   <button type="button" class="btn btn-success" id="addBook" data-toggle="modal" data-target="#addModalBook"> 
+          <img  src="../src/image/icons/add.svg">
+  </button> 
+  <?php include ("addBook.php"); ?> 
 </body>
 </html>
+

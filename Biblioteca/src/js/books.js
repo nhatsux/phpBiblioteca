@@ -5,7 +5,7 @@ var num_pages = 0;
 var items_pagination = 0;
 
 async function buildViewBooks(){
-    
+    deck.innerHTML = "";
     if (window.innerWidth <=810){
         searchMobile.classList.remove("hide");
         num_books = 6;
@@ -18,17 +18,18 @@ async function buildViewBooks(){
         searchMobile.classList.add("hide");
         num_books = 8;
         items_pagination = 12;
-    }    
-    await getDataBooks();
+    }  
+    
+    if (booksItemsPages.length == 0){
+        await getDataBooks();
+    }  
     num_pages = getPages(num_books);
     createPagination(items_pagination);
     getBookCurrentPage(1);
-    
-   
 }
  
 function getBooks(){
-    if (true){
+    if (booksItemsPages.length >0){
         booksItemsPages.forEach(book=> {
            
             deck.innerHTML += 
@@ -47,7 +48,7 @@ function getBooks(){
                            
                         </div>
                         <div>
-                        <button type="button" class="btn btn-primary btn-sm mb-2 ml-2">edit</button>
+                        <button type="button" class="btn btn-primary btn-sm mb-2 ml-2"><img  src="../src/image/icons/edit.png"></button>
                         </div>
                     </div>
                 </div>
@@ -57,6 +58,7 @@ function getBooks(){
     }
 }
 function createPagination (limit){
+    pages.innerHTML ="";
     pages.innerHTML += 
     `
     <li class="page-item">
@@ -90,7 +92,7 @@ function createPagination (limit){
 async function getBookCurrentPage (page){
         booksItemsPages = await getBooksByPage(num_books,page)
         deck.innerHTML ="";
-        getBooks()
+        getBooks();
 }
 
 buildViewBooks();
@@ -127,3 +129,6 @@ searchMobile.onkeyup = function (){
     deck.innerHTML ="";
     getBooks();
 }
+
+window.onresize = buildViewBooks;
+
