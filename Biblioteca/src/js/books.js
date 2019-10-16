@@ -3,6 +3,7 @@ var num_books = 0;
 var booksItemsPages= new Array();
 var num_pages = 0;
 var items_pagination = 0;
+var item_modal;
 
 async function buildViewBooks(){
     deck.innerHTML = "";
@@ -40,15 +41,17 @@ function getBooks(){
                         <img src="../src/image/cover-books/${book.cover}" class="card-img" alt="...">
                     </div>
                     <div class="col-md-6">
-                        <div class="card-body">
+                        <div class="card-body" style="height:75%;">
                             <p class="title text-center">${book.title}</p>
                             <p class="info">ISBN: ${book.ISBN}</p>
                             <p class="info">AUTOR: ${book.author}</p>
                             <p class="info">EDITORIAL: ${book.editorial}</p>
                            
                         </div>
-                        <div>
-                        <button type="button" class="btn btn-primary btn-sm mb-2 ml-2"><img  src="../src/image/icons/edit.png"></button>
+                        <div class= "card-footer" data-book= "${book.ISBN}">
+                        <img class="edit btn btn-primary btn-sm "  style="width: 40px;" src="../src/image/icons/edit.png" data-toggle="modal" data-target="#addModalBook">
+                        <img class="delete btn btn-danger btn-sm " style="width: 40px;" src="../src/image/icons/delete.png" data-toggle="modal" data-target="#addModalBook">
+                        <img class="loan btn btn-success btn-sm "  style="width: 40px;" src="../src/image/icons/edit.png">
                         </div>
                     </div>
                 </div>
@@ -130,5 +133,21 @@ searchMobile.onkeyup = function (){
     getBooks();
 }
 
-window.onresize = buildViewBooks;
+deck.onclick= e =>{
 
+    var isbn = e.target.parentNode.dataset.book;
+    item_modal = {
+        name: e.target.classList[0],
+        book:booksItemsPages.find(book => book.ISBN === isbn)
+    }
+    console.log(item_modal);
+
+}
+
+addBook.onclick  = ()=> {
+    item_modal = {
+        name: "add"
+    }
+}
+window.onresize = buildViewBooks;
+export {item_modal}

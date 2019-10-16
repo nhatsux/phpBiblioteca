@@ -58,7 +58,7 @@ p{
 .nav-item img {
     width: 30px;
 }
-.btn img {
+img {
     width: 20px;
 }
 .nav-link{
@@ -68,5 +68,6 @@ p{
 .form-group {
     align-items: center;
 }
+
 
 

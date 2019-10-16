@@ -4,7 +4,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="titleModalBook">title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="reset" id="cancel" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -22,7 +22,7 @@
                   <input type="text" id="author"  class="form-control" placeholder="Autor del libro">        
                   <label for="ISBN">ISBN</label>
                   <input type="text" id="ISBN" class="form-control" placeholder="ISBN del libro">
-                  <label for="ISBN">Editorial</label>
+                  <label for="editorial">Editorial</label>
                   <input type="text" id="editorial" class="form-control" placeholder="Editorial del libro">
               </div>
           </div>
@@ -43,7 +43,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-secondary" id="btnCancel" data-dismiss="modal">Cancelar</button>
         <button type="button" class="btn btn-primary" id="btnBookM">button</button>
       </div>
     </div>
