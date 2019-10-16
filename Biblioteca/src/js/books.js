@@ -140,8 +140,6 @@ deck.onclick= e =>{
         name: e.target.classList[0],
         book:booksItemsPages.find(book => book.ISBN === isbn)
     }
-    console.log(item_modal);
-
 }
 
 addBook.onclick  = ()=> {

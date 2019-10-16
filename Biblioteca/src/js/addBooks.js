@@ -6,7 +6,6 @@ imgCover.onclick  = ()=> { cover.click()}
 
 
 document.onclick= ()=> {
-    console.log(item_modal)
  if (item_modal != undefined){
     switch (item_modal.name) {
         case "edit":
@@ -21,7 +20,7 @@ document.onclick= ()=> {
              disabledForm();
         break;
         case "add":
-             btnBookM.innerHTML = "agregar"; titleModalBook.innerHTML="Agregar Libro"; 
+             btnBookM.innerHTML = "Agregar"; titleModalBook.innerHTML="Agregar Libro"; 
              activeForm();
              emptyForm();
         break;
@@ -42,6 +41,7 @@ function fillFormEdit(){
     language.value = item_modal.book.language;
     numPages.value = item_modal.book.num_page;
     amount.value = item_modal.book.amount;
+    imgCover.src = `../src/image/cover-books/${item_modal.book.cover}`
 }
 
 function emptyForm(){
@@ -53,6 +53,7 @@ function emptyForm(){
     language.value = ""
     numPages.value = ""
     amount.value = ""
+    imgCover.src = `../src/image/icons/image.png`
 }
 
 function disabledForm(){
@@ -65,6 +66,7 @@ function disabledForm(){
     language.disabled = true;
     numPages.disabled = true;
     amount.disabled = true;
+    cover.disabled = true;
 }
 
 function activeForm(){
@@ -77,6 +79,16 @@ function activeForm(){
     language.disabled = false;
     numPages.disabled = false;
     amount.disabled = false;
+    cover.disabled = false;
+}
+
+btnBookM.onclick = ()=>{
+    
+  console.log(btnBookM.innerHTML)
+   
+}
+function validatorFormBook (){
+    
 }
 
 

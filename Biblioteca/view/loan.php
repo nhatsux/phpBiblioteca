@@ -1,10 +1,9 @@
-
-<div class="modal fade" id="addModalBook" tabindex="-1" role="dialog" aria-labelledby="addModalBook" aria-hidden="true">
+<div class="modal fade" id="addModalLoan" tabindex="-1" role="dialog" aria-labelledby="addModalLoan" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="titleModalBook">title</h5>
-        <button type="reset" id="cancel" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="titleModalLoan">title</h5>
+        <button type="reset" id="cancelLoan" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -17,7 +16,7 @@
               </div>
               <div class="form-group col-md-6">
                   <label for="title">Titulo</label>
-                  <input type="text" id="title"  class="form-control" placeholder="Titulo del libro" required>
+                  <input type="text" id="title"  class="form-control" placeholder="Titulo del libro">
                   <label for="title">Autor</label>
                   <input type="text" id="author"  class="form-control" placeholder="Autor del libro">        
                   <label for="ISBN">ISBN</label>
@@ -44,7 +43,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" id="btnCancel" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="btnBookM">button</button>
+        <button type="button" class="btn btn-primary" id="btnLoanM">button</button>
       </div>
     </div>
   </div>
