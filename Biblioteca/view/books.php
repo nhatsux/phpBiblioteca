@@ -22,8 +22,8 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <input class="form-control mr-sm-2 navbar-brand text-dark hide" type="search" placeholder="Buscar" aria-label="Search" id="searchMobile" style="width:76%;">
-
+  <input class="form-control mr-sm-2 navbar-brand text-dark hide" type="search" placeholder="Buscar" aria-label="Search" id="searchMobile" style="width:56%;">
+  <img class="edit btn btn-primary btn-sm  hide"  style="width: 60px;" src="../src/image/icons/search.png" style="width:20%;" id="searchMobileBtn">
 
   <div class="collapse navbar-collapse" id="navbarToggler">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -38,14 +38,14 @@
         <a class="nav-link" href="#"><img  src="../src/image/icons/loan.png"> Prestamos</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" id="search">
+    <form class="form-inline my-2 my-lg-0" id="search">
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" >
       <a class="nav-link" href="#">Salir</a>
     </form>
   </div>
 </nav>
    <div class = "container-fluid ">
-       <div class= "d-flex justify-content-center ">
+       <div id="container" class= "d-flex justify-content-center ">
             <div  class=" card-columns mt-5" id="deck">
             </div>
        </div>
@@ -59,9 +59,11 @@
        </div>
    </div>
    <button type="button" class="btn btn-success" id="addBook" data-toggle="modal" data-target="#addModalBook"> 
-          <img  src="../src/image/icons/add.svg">
+          <img   title="Agregar un libro nuevo" src="../src/image/icons/add.svg">
   </button> 
   <?php include ("addBook.php"); ?> 
+  <?php include ("loan.php"); ?> 
+ 
 </body>
 </html>
 

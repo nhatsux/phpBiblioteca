@@ -7,16 +7,22 @@ var item_modal;
 
 async function buildViewBooks(){
     deck.innerHTML = "";
-    if (window.innerWidth <=810){
+    if (window.innerWidth <=970){
         searchMobile.classList.remove("hide");
+        searchMobileBtn.classList.remove("hide");
+        search.elements[0].style.display = "none"
         num_books = 6;
         items_pagination = 5;
     }else if(window.innerWidth >1525) {
         searchMobile.classList.add("hide");
+        searchMobileBtn.classList.add("hide");
+        search.elements[0].style.display = "block"
         num_books = 18;
         items_pagination = 12;
     } else {
         searchMobile.classList.add("hide");
+        searchMobileBtn.classList.add("hide");
+        search.elements[0].style.display = "block"
         num_books = 8;
         items_pagination = 12;
     }  
@@ -49,9 +55,8 @@ function getBooks(){
                            
                         </div>
                         <div class= "card-footer" data-book= "${book.ISBN}">
-                        <img class="edit btn btn-primary btn-sm "  style="width: 40px;" src="../src/image/icons/edit.png" data-toggle="modal" data-target="#addModalBook">
-                        <img class="delete btn btn-danger btn-sm " style="width: 40px;" src="../src/image/icons/delete.png" data-toggle="modal" data-target="#addModalBook">
-                        <img class="loan btn btn-success btn-sm "  style="width: 40px;" src="../src/image/icons/edit.png">
+                        <img class="edit btn btn-primary btn-sm "  title="Editar" style="width: 40px;" src="../src/image/icons/edit.png" data-toggle="modal" data-target="#addModalBook">
+                        <img class="loan btn btn-success btn-sm "  title= "Prestar" style="width: 40px;" src="../src/image/icons/loan.png" data-toggle="modal" data-target="#addModalLoan">
                         </div>
                     </div>
                 </div>
@@ -127,25 +132,26 @@ search.onkeyup = function (){
     getBooks();
 }
 
-searchMobile.onkeyup = function (){
-    booksItemsPages = getBooksBySearch(searchMobile.value);
-    deck.innerHTML ="";
-    getBooks();
+searchMobileBtn.onclick = function (){
+    if (searchMobile.value.trim()!= ""){
+        booksItemsPages = getBooksBySearch(searchMobile.value);
+         deck.innerHTML ="";
+        getBooks();
+    }
+    
 }
 
 deck.onclick= e =>{
-
-    var isbn = e.target.parentNode.dataset.book;
-    item_modal = {
-        name: e.target.classList[0],
-        book:booksItemsPages.find(book => book.ISBN === isbn)
+    if (e.target.classList[0] == "edit" || e.target.classList[0] == "loan" ){
+        
+        var isbn = e.target.parentNode.dataset.book;
+        item_modal = {
+            name: e.target.classList[0],
+            book:booksItemsPages.find(book => book.ISBN === isbn)
+        }
+        console.log(item_modal)
     }
 }
 
-addBook.onclick  = ()=> {
-    item_modal = {
-        name: "add"
-    }
-}
 window.onresize = buildViewBooks;
 export {item_modal}
