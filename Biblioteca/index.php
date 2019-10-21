@@ -8,8 +8,7 @@
     <link rel="stylesheet" href="src/bootstrap.min.css">
     <script src="src/jquery-3.3.1.slim.min.js"></script>
     <script src="src/sweetalert.min.js"></script>
-    
-    <script  type="module" src="src/index.js" type="text/javascript"></script>
+    <script  type="module" src="src/index.js" ></script>
 
     <title>Biblioteca</title>
 </head>

@@ -36,6 +36,23 @@
         </form>
         <div id= "resultSearchStudent">
         </div>
+        <div>
+        
+            <table id="tableLoan" class="table table-bordered hide">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Titulo</th>
+                        <th>Fecha inicio</th>
+                        <th>Fecha final</th>
+                    </tr>
+                </thead>
+                <tbody id="contentLoanTable" > 
+                    
+                </tbody>
+            </table>
+          
+        </div>
        </div>
       
       </div>

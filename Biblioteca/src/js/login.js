@@ -6,13 +6,20 @@ function loginUser(usuario,pass){
         swal("Error","Faltan datos","error")
 
     }else {
-        if (usuario === "admi" && pass === "123"){
-            alert (`Sesion iniciada`) // redireccion
-            band = true;
-            window.location.replace("view/books.php");
-        }
-        else {
-            swal("Error","Usuario Invalido","error")
+        var formdata = new FormData();
+        formdata.append("txtCve", usuario);
+        formdata.append("txtPwd", pass);
+        var xmlhttp = new XMLHttpRequest(); 
+        xmlhttp.responseType = 'json';  // new HttpRequest instance 
+        xmlhttp.open("POST", 'model/login.php',true);
+        xmlhttp.send(formdata);
+        xmlhttp.onload = e =>{
+           var  response = e.target.response;
+            if (response.successful){
+                band == true;
+                window.location.replace("view/books.php");
+            }else 
+                swal("Error","Usuario no valido","error")
         }
     }
     return band

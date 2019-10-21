@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if (!isset($_SESSION["active"]) ){
+    header("Location: error.php?sErr=".$sErr);
+		exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -40,7 +47,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0" id="search">
       <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" >
-      <a class="nav-link" href="#">Salir</a>
+      <a class="nav-link"  href="logout.php">Salir</a>
     </form>
   </div>
 </nav>

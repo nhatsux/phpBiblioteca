@@ -1,4 +1,5 @@
 import {item_modal} from './books.js'
+import {findStudent} from './studentData.js'
 
 
 imgCover.onclick  = ()=> { cover.click()}
@@ -241,13 +242,35 @@ async function searchNumControl(){
         buttons: false,
         timer: 3000,
       })
-    var response  = true;
-    if (response){
+    var response  = findStudent (numC.value)
+        console.log(response)
+    if (response != undefined){
+        let msj;
+        let bgColorTable
+        if (!response.activo){
+            msj= "El alumno tiene una multa pendiente";
+            bgColorTable= "bg-danger";
+        }else if (!response.vigencia){
+            msj= "Sin vigencia en el sistema";
+            bgColorTable= "bg-warning";
+        }else {
+            msj= "Aceptado";
+            bgColorTable= "bg-success";
+        }
         resultSearchStudent.innerHTML = 
         `
-        <hr>
+        <br>
         <div> 
-            Student
+        <table class="table table-bordered">
+            <tbody>
+                <tr class= "${bgColorTable}"> 
+                    <td>${response.matricula}</td>
+                    <td>${response.nombre} ${response.apePaterno} ${response.apeMaterno}</td>
+                    <td>Ing Sistemas Computacionales</td>
+                </tr>
+            </tbody>
+        </table>
+            <small>${msj}, Actualizar datos <a class="edit btn btn-primary btn-sm " href="student.php">Ir</a></small>
         </div>
         `
     }else {
@@ -259,7 +282,43 @@ async function searchNumControl(){
         </div>
         `
     }
+    resultLoan(response.activo,response.vigencia);
 
 
+}
+
+function resultLoan(activo,vigencia){
+    if (vigencia){
+        let objResults = getLoan();
+       if (objResults.length === 0){
+        tableLoan.classList.remove("hide");
+        contentLoanTable.innerHTML = 
+            `
+            <td colspan= 4> 
+               Sin ningun prestamo
+            </td> 
+            `
+        }
+        buildListLoan(objResults,activo);
+
+    }
+}
+
+function getLoan(){
+    return [1,2,3];
+}
+
+ function buildListLoan(arrayLoan){
+    if (arrayLoan.length>0){
+        contentLoanTable.innerHTML ="";
+        arrayLoan.forEach(element => {
+            contentLoanTable.innerHTML += 
+            `
+            <tr>
+                <td>${element}</td>
+            </tr>
+            `
+        });
+    }
 }
 
