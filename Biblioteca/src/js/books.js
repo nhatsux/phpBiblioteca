@@ -1,4 +1,4 @@
-import {getPages,getDataBooks,getBooksByPage,getBooksBySearch}from './books.data.js';
+import {getPages,getDataBooks,getBooksByPage,getBooksBySearch, listBooks}from './books.data.js';
 var num_books = 0;
 var booksItemsPages= new Array();
 var num_pages = 0;
@@ -28,7 +28,7 @@ async function buildViewBooks(){
     }  
     
     if (booksItemsPages.length == 0){
-        await getDataBooks();
+       await getDataBooks();
     }  
     num_pages = getPages(num_books);
     createPagination(items_pagination);
