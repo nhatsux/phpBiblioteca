@@ -1,7 +1,7 @@
 <?php 
-include_once("AccesoDatos.php");
+include_once("DataAccess.php");
 session_start();
-$oAccesoDatos=new AccesoDatos();
+$oAccesoDatos=new DataAccess();
 $sCadJson="";
 $response = false;
 $arrRS = null;

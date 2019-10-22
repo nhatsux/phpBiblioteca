@@ -7,7 +7,7 @@ $Book = new Book();
 $cdJson="";
 
     /*Verificar que exista sesión*/
-    if (isset($_SESSION["usuario"]) && !empty($_SESSION["usuario"])){
+    if (isset($_SESSION["active"]) && !empty($_SESSION["active"])){
         try{
             $arrBook = $Book->buscarTodos();
         
