@@ -35,9 +35,9 @@
               </div>
               <div class="form-group col-md-6">
                   <label for="biding">Numero paginas</label>
-                  <input type="number" id="numPages" class="form-control" placeholder="Paginas del libro"  pattern="[0-9]{2}" required>
+                  <input type="number" id="numPages" class="form-control" placeholder="Paginas del libro" min= 1; pattern="[0-9]{2}" required>
                   <label for="biding">Cantidad</label>
-                  <input type="number" id="amount" class="form-control" pattern="[0-9]{2,}" placeholder="Numero de libros existentes " required>
+                  <input type="number" id="amount" class="form-control" pattern="[0-9]{2,}" min=0 placeholder="Numero de libros existentes " required>
               </div>
           </div>
           

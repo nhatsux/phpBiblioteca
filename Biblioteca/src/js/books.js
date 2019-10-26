@@ -5,7 +5,7 @@ var num_pages = 0;
 var items_pagination = 0;
 var item_modal;
 
-async function buildViewBooks(){
+async function buildViewBooks(update){
     deck.innerHTML = "";
     if (window.innerWidth <=970){
         searchMobile.classList.remove("hide");
@@ -17,17 +17,17 @@ async function buildViewBooks(){
         searchMobile.classList.add("hide");
         searchMobileBtn.classList.add("hide");
         search.elements[0].style.display = "block"
-        num_books = 18;
+        num_books = 16;
         items_pagination = 12;
     } else {
         searchMobile.classList.add("hide");
         searchMobileBtn.classList.add("hide");
         search.elements[0].style.display = "block"
-        num_books = 8;
+        num_books = 12;
         items_pagination = 12;
     }  
     
-    if (booksItemsPages.length == 0){
+    if (booksItemsPages.length == 0 || update){
        await getDataBooks();
     }  
     num_pages = getPages(num_books);
@@ -48,15 +48,15 @@ function getBooks(){
                     </div>
                     <div class="col-md-6">
                         <div class="card-body" style="height:75%;">
-                            <p class="title text-center">${book.title}</p>
+                            <p class="title">${book.title}</p>
                             <p class="info">ISBN: ${book.ISBN}</p>
                             <p class="info">AUTOR: ${book.author}</p>
-                            <p class="info">EDITORIAL: ${book.editorial}</p>
+                            
                            
                         </div>
                         <div class= "card-footer" data-book= "${book.ISBN}">
-                        <img class="edit btn btn-primary btn-sm "  title="Editar" style="width: 40px;" src="../src/image/icons/edit.png" data-toggle="modal" data-target="#addModalBook">
-                        <img class="loan btn btn-success btn-sm "  title= "Prestar" style="width: 40px;" src="../src/image/icons/loan.png" data-toggle="modal" data-target="#addModalLoan">
+                        <img class="edit btn btn-primary btn-sm "  title="Editar"  src="../src/image/icons/edit.png" data-toggle="modal" data-target="#addModalBook">
+                        <img class="loan btn btn-success btn-sm "  title= "Prestar"  src="../src/image/icons/loan.png" data-toggle="modal" data-target="#addModalLoan">
                         </div>
                     </div>
                 </div>
@@ -103,7 +103,7 @@ async function getBookCurrentPage (page){
         getBooks();
 }
 
-buildViewBooks();
+
 
 pages.onclick = function (e){
     
@@ -126,8 +126,8 @@ pages.onclick = function (e){
     }
 }
 
-search.onkeyup = function (){
-    booksItemsPages = getBooksBySearch(search.value);
+searchInput.onkeyup = function (){
+    booksItemsPages = getBooksBySearch(searchInput.value);
     deck.innerHTML ="";
     getBooks();
 }
@@ -153,5 +153,9 @@ deck.onclick= e =>{
     }
 }
 
-window.onresize = buildViewBooks;
-export {item_modal}
+buildViewBooks(false);
+window.onresize = () =>{ 
+    if (window.innerWidth >=970)
+        buildViewBooks(false)
+    };
+export {item_modal,buildViewBooks}

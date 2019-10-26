@@ -1,4 +1,4 @@
-import {item_modal} from './books.js'
+import {item_modal,buildViewBooks} from './books.js'
 import {findStudent} from './studentData.js'
 
 
@@ -35,7 +35,7 @@ function fillFormEdit(){
     author.value= item_modal.book.author;
     ISBN.value= item_modal.book.ISBN;
     editorial.value = item_modal.book.editorial;
-    biding.value = item_modal.book.binding;
+    biding.value = item_modal.book.biding;
     language.value = item_modal.book.language;
     numPages.value = item_modal.book.num_page;
     amount.value = item_modal.book.amount;
@@ -110,14 +110,14 @@ return isFull;
 
 function addBookModal (){
     if (validatorFormBook()){
-        sendForm(createForm(),"/file.php","Guardando");
+        sendForm(createForm(),"../model/AddBook.php","Guardando");
         
     }
 }
 
 function editBookModal(){
     if (validatorFormBook())
-        sendForm(createForm(),"/file.php","Editando");
+        sendForm(createForm(),"../model/EditBook.php","Editando");
 }
 
 cover.onchange = () =>{
@@ -171,51 +171,68 @@ function isFileImage() {
 }
 
 function createForm(){
-    var formdata = new FormData();
-    formdata.append("cover", imgCover.data);
-    formdata.append("title",title.value);
-    formdata.append("author",author.value);
-    formdata.append("ISBN",ISBN.value);
-    formdata.append("editorial",editorial.value);
-    formdata.append("biding",biding.value);
-    formdata.append("language",language.value);
-    formdata.append("numPages", numPages.value);
-    formdata.append("amount", amount.value);
-return formdata;
+   var  data = { title: title.value,
+            author: author.value,
+            num_page: parseInt(numPages.value),
+            biding: biding.value,
+            editorial: editorial.value,
+            language : language.value,
+            cover: imgCover.data,
+            amount : parseInt(amount.value),
+            ISBN : ISBN.value
+           };
+return data;
 }
 
 
-async function   sendForm (formdata,url,msj){
+async function   sendForm (data,url,msj){
     await swal(`${msj}...`, {
         buttons: false,
-        timer: 3000,
+        timer: 2000,
       })
-    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    xmlhttp.open("POST", url);
-    xmlhttp.send(formdata);
-    xmlhttp.onreadystatechange = ()=>{
-       
-        if ( xmlhttp.status === 200){
-            swal({
+      
+      try {
+        const response = await fetch(url, {
+          method: 'POST', 
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        const json = await response.json();
+        if ( json.successful){
+        await swal({
                 title: "Exito",
-                text: "Proceso Exisoto",
+                text: `${json.msj}`,
                 icon: "success",
                 button: "Ok",
-                closeOnClickOutside: false
+                closeOnClickOutside: false,
+                timer: 2000
                 });
-            
+            cancel.click();
+            buildViewBooks(true);
+          
         }else {
             swal({
                 title: "Error",
-                text: "Intenta otra vez",
+                text:  `${json.msj}`,
                 icon: "error",
                 button: "Ok",
                 closeOnClickOutside: false
                 });
         }
-
-
-    }
+        
+      } catch (error) {
+        swal({
+            title: "Error",
+            text: `Error:(${error})`,
+            icon: "error",
+            button: "Ok",
+            closeOnClickOutside: false
+            });
+      }
+       
+        
     
 }
 function loanBook(){
@@ -233,24 +250,16 @@ searchStudent.onclick = ()=>{
 
 
 async function searchNumControl(){
-    var formdata = new FormData();
-    formdata.append("numControl", numC.value);
-    var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-    xmlhttp.open("POST", 'getStudent.php');
-    xmlhttp.send(formdata);
-    await swal(`Buscando numero control ${numC.value}...`, {
-        buttons: false,
-        timer: 3000,
-      })
-    var response  = findStudent (numC.value)
-        console.log(response)
-    if (response != undefined){
+    
+    var response  = await findStudent (numC.value)
+    console.log(response);
+    if (response.successful){
         let msj;
         let bgColorTable
-        if (!response.activo){
+        if (!response.student.activo){
             msj= "El alumno tiene una multa pendiente";
             bgColorTable= "bg-danger";
-        }else if (!response.vigencia){
+        }else if (!response.student.vigencia){
             msj= "Sin vigencia en el sistema";
             bgColorTable= "bg-warning";
         }else {
@@ -264,9 +273,9 @@ async function searchNumControl(){
         <table class="table table-bordered">
             <tbody>
                 <tr class= "${bgColorTable}"> 
-                    <td>${response.matricula}</td>
-                    <td>${response.nombre} ${response.apePaterno} ${response.apeMaterno}</td>
-                    <td>Ing Sistemas Computacionales</td>
+                    <td>${response.student.matricula}</td>
+                    <td>${response.student.nombre} ${response.student.apePaterno} ${response.student.apeMaterno}</td>
+                    <td>${response.student.carrera}</td>
                 </tr>
             </tbody>
         </table>
@@ -282,12 +291,13 @@ async function searchNumControl(){
         </div>
         `
     }
-    resultLoan(response.activo,response.vigencia);
+    resultLoan(response.student.activo,response.student.vigencia);
 
 
 }
 
 function resultLoan(activo,vigencia){
+    console.log(`activo `)
     if (vigencia){
         let objResults = getLoan();
        if (objResults.length === 0){

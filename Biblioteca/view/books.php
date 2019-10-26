@@ -18,7 +18,6 @@ if (!isset($_SESSION["active"]) ){
     <script src="../src/jquery-3.3.1.slim.min.js"></script>
     <script src="../src/bootstrap.min.js"></script>
     <script src="../src/popper.min.js"></script>
-
     <script src="../src/sweetalert.min.js"></script>
     <script type="module" src="../src/js/books.js"  type="text/javascript"></script>
     <script type="module" src="../src/js/addBooks.js" type="text/javascript"></script>
@@ -30,23 +29,23 @@ if (!isset($_SESSION["active"]) ){
     <span class="navbar-toggler-icon"></span>
   </button>
   <input class="form-control mr-sm-2 navbar-brand text-dark hide" type="search" placeholder="Buscar" aria-label="Search" id="searchMobile" style="width:56%;">
-  <img class="edit btn btn-primary btn-sm  hide"  style="width: 60px;" src="../src/image/icons/search.png" style="width:20%;" id="searchMobileBtn">
+  <img class=" btn btn-primary btn-sm  hide"  style="width: 60px;" src="../src/image/icons/search.png" style="width:20%;" id="searchMobileBtn">
 
   <div class="collapse navbar-collapse" id="navbarToggler">
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item">
+      <li class="nav-item active">
        
         <a class="nav-link" href="#"><img  src="../src/image/icons/book.png"> Libros</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><img  src="../src/image/icons/student.png"> Alumnos</a>
+        <a class="nav-link" href="student.php"><img  src="../src/image/icons/student.png"> Alumnos</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#"><img  src="../src/image/icons/loan.png"> Prestamos</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" id="search">
-      <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" >
+      <input class="form-control mr-sm-2" id = "searchInput"  type="search" placeholder="Buscar" aria-label="Search" >
       <a class="nav-link"  href="logout.php">Salir</a>
     </form>
   </div>

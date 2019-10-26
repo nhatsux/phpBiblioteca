@@ -18,7 +18,31 @@ new Student('16010213','Poblete','Farias','Hernan',false,7,true)
 
 function findStudent (numControl){
    
-    return listAlumns.find(alumn =>  alumn.matricula == numControl)
+  return new Promise ( async resolve =>{
+    try {
+      const response = await fetch("../model/GetStudent.php", {
+        method: 'POST', 
+        body: JSON.stringify({num_control: numControl}),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const json = await response.json();   
+      return resolve(json);
+    } catch (error) {
+      swal({
+          title: "Error",
+          text: `Error:(${error})`,
+          icon: "error",
+          button: "Ok",
+          closeOnClickOutside: false
+          });
+    }
+
+
+  });
+    
+      
 }
 
 export {findStudent}

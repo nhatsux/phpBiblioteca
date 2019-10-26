@@ -40,7 +40,7 @@ function getBooksByPage(amount,page){
 
 function getBooksBySearch(search){
     return listBooks.filter(book => { 
-        return book.title.replace(/ /g,"").includes(search.replace(/ /g,"").toUpperCase().trim())|| 
+        return book.title.replace(/ /g,"").toUpperCase().includes(search.replace(/ /g,"").toUpperCase().trim())|| 
         book.ISBN.includes(search.trim())
     }).slice(0,8);
 }

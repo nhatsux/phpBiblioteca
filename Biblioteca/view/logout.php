@@ -16,7 +16,7 @@ $sNom="";
 		$sErr = "Falta establecer el login";
 	
 	if ($sErr == "")
-		header("Location: ../index.php");
+		header("Location: ../");
 	else
 		header("Location: error.php?sError=".$sErr);
 	exit();
