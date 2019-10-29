@@ -41,7 +41,7 @@ if (!isset($_SESSION["active"]) ){
         <a class="nav-link" href="student.php"><img  src="../src/image/icons/student.png"> Alumnos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#"><img  src="../src/image/icons/loan.png"> Prestamos</a>
+        <a class="nav-link" href="loans.php"><img  src="../src/image/icons/loan.png"> Prestamos</a>
       </li>
     </ul>
     <form class="form-inline my-2 my-lg-0" id="search">

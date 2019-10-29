@@ -162,7 +162,7 @@ values(16,'EL PROFETA Y EL JARDÍN DEL PROFETA','GIBRAN JALIL GIBRAN',128,'Tapa 
   ,(3,'LA DESAPARICIÓN DE STEPHANIE MAILER','JOËL DICKER',656,'Tapa blanda','ALFAGUARA','CASTELLANO','9788420432472','9788420432472.jpg')
   ,(32,'OJOS DE AGUA','DOMINGO VILLAR',208,'Tapa blanda','SIRUELA','CASTELLANO','9788417454913','9788417454913.jpg');
 
-
-
-
-					   
+INSERT INTO prestamo (matricula,ISBN,refrendo,fechaini,fechaFin,estado,id_deuda,tipo) VALUES ('16010201','9788417430733',1,current_date,current_date + INTERVAL '3 day',true,null,true),
+('16010201','9788490624401',1,current_date,current_date + INTERVAL '3 day',true,null,true),
+('16010202','9788490624401',1,current_date,current_date + INTERVAL '3 day',true,null,true),
+('16010202','9788491991212',1,'2019-10-25', '2019-10-28',false,null,true);			   
