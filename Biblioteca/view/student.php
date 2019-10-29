@@ -12,16 +12,19 @@ if (!isset($_SESSION["active"]) ){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Estudiantes</title>
-    <link rel="stylesheet" href="../src/bootstrap.min.css">
-    <link rel="stylesheet" href="../src/style/books.css">
+    
+    <link rel="stylesheet" href="../src/bootstrap.min.css">    
     <link rel="stylesheet" href="../src/style/menu.css">
+    <link rel="stylesheet" href="../src/style/students.css">
     <script src="../src/jquery-3.3.1.slim.min.js"></script>
     <script src="../src/bootstrap.min.js"></script>
     <script src="../src/popper.min.js"></script>
     <script src="../src/sweetalert.min.js"></script>
+    <script type="module" src="../src/js/students.js"  type="text/javascript"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+   
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -47,7 +50,25 @@ if (!isset($_SESSION["active"]) ){
         </form>
     </div>
     </nav>
-
-    
+    <div class="table">
+        <h4>Lista de estudiantes</h4>
+         <table class ="table" id="tableStudents">
+             <thead>
+                 <tr>
+                    <th>Matricula</th>
+                    <th>Nombre Completo</th>
+                    <th>Carrera</th>
+                    <th>Operacion</th>
+                 </tr>
+             </thead>
+             <tbody id="tableStudentBody">
+                 
+             </tbody>
+         </table>
+         <button type="button" class="btn btn-success" id="addBook" data-toggle="modal" data-target="#addModalBook"> 
+          <img   title="Agregar un libro nuevo" src="../src/image/icons/add.svg">
+        </button>  
+    </div>
+    <?php include ("addStudent.php"); ?> 
 </body>
 </html>

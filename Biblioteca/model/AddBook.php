@@ -21,6 +21,7 @@ if ($_SESSION["active"]){
                                             ".$data->num_page.",'".$data ->biding."','".$data->editorial."',
                                             '".$data ->language."','".$data->ISBN."','".$data->cover."')";
             $response =  $oAccesoDatos -> ejecutarComando($sQuery);
+            $oAccesoDatos -> desconectar();
             if ($response >0)
                 $msj ="Agregado exitosamente";
             else 

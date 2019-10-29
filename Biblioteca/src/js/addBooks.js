@@ -256,7 +256,7 @@ async function searchNumControl(){
     if (response.successful){
         let msj;
         let bgColorTable
-        if (!response.student.activo){
+        if (response.student.activo){
             msj= "El alumno tiene una multa pendiente";
             bgColorTable= "bg-danger";
         }else if (!response.student.vigencia){
@@ -297,38 +297,38 @@ async function searchNumControl(){
 }
 
 function resultLoan(activo,vigencia){
-    console.log(`activo `)
-    if (vigencia){
-        let objResults = getLoan();
-       if (objResults.length === 0){
-        tableLoan.classList.remove("hide");
-        contentLoanTable.innerHTML = 
+    resultSearchStudent.innerHTML += "<hr>"
+    var listLoans = getLoan();
+    if (listLoans.length >0){
+        resultSearchStudent.innerHTML += "<p>Lista de prestamos</p>";
+        console.log(tableLoan.classList);
+        console.log(tableLoan.classList.remove("hide"));
+        listLoans.forEach(loan => {
+            contentLoanTable.innerHTML +=
             `
-            <td colspan= 4> 
-               Sin ningun prestamo
-            </td> 
-            `
-        }
-        buildListLoan(objResults,activo);
-
-    }
-}
-
-function getLoan(){
-    return [1,2,3];
-}
-
- function buildListLoan(arrayLoan){
-    if (arrayLoan.length>0){
-        contentLoanTable.innerHTML ="";
-        arrayLoan.forEach(element => {
-            contentLoanTable.innerHTML += 
-            `
-            <tr>
-                <td>${element}</td>
+            <tr> 
+                <td>${loan}</td>
             </tr>
             `
         });
+    }else {
+        resultSearchStudent.innerHTML += 
+        `
+        <b>No existen prestamos actualmente para este alumno </b>
+        `
     }
+   
+}
+
+function getLoan(){
+    return [1,2,3,4,5,6];
+}
+
+
+cancelLoan1.onclick = ()=>{
+    console.log("lol")
+    resultSearchStudent.innerHTML ="";
+    contentLoanTable.innerHTML = "";
+    tableLoan.classList.add("hide");
 }
 

@@ -37,8 +37,8 @@ $sCadJson =
                 "nombre":"'.$response[0][1].'",
                 "apePaterno":"'.$response[0][2].'",
                 "apeMaterno":"'.$response[0][3].'",
-                "activo":"'.$response[0][4].'",
-                "vigencia":"'.$response[0][5].'",
+                "activo":"'.($response[0][4]=="t"?1:0).'",
+                "vigencia":"'.($response[0][5]=="t"?1:0).'",
                 "carrera" : "'.$response[0][6].'"
                 }
 }';
