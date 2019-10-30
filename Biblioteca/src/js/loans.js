@@ -1,7 +1,9 @@
-import {getLoansList} from './loansData.js'
+import {getLoansList, getTables} from './loansData.js'
 var responseLoans;
 var loansFilter;
 var filtro;
+var tables;
+
 var i = 0;
 async function buildViewloans (){
     responseLoans= await getLoansList();
@@ -9,6 +11,9 @@ async function buildViewloans (){
     builFiltersForm(responseLoans.arrLoans);
 }
 
+async function buildTables (){
+    tables= await getTables();
+}
 
 function builContentTable(listLoans){
     tableLoansBody.innerHTML ="";
@@ -220,36 +225,54 @@ btnReporte.onclick = () =>{
 }
 
 btnReporteGlobal.onclick = () =>{
-    var headers = {
+    var headersStudents = {
         matricula:    "matricula",
         nombre:       "nombre",
         apePaterno:   "apePaterno",
         apeMaterno:   "apeMaterno",
         activo:       "activo",
         vigencia:     "vigencia",
-        carrera:      "carrera",
+        id_carrera:      "id_carrera",
+    }
 
+    var headersLoans = {
+        matricula:"matricula",
         ISBN :"ISBN",
         refrendo : "Refrendo",
         fechaIni :"Fecha Inicio",
         fechaFin :"Fecha Fin",
         estado: "Estado",
-        tipo : "Tipo",
+        id_deuda: "id_deuda",
+        tipo : "Tipo"
+    }
 
-        title : "title",
-        author :"author",
+    var headersBooks = {
+        ISBN :"ISBN",
+        titulo : "titulo",
+        autor :"autor",
         num_page : "num_page",
-        biding :"biding",
+        encuadernacion :"encuadernacion",
         editorial :"editorial",
-        language :"language",
-        cover :"cover",
-        amount :"amount"
+        lengua :"lengua",
+        portada :"portada",
+        cantidad :"cantidad"
     }
     var fecha = new Date();
     
-    var datos = loansFilter ? loansFilter.map(l=>l) : responseLoans.arrLoans.map(l=>l);
-    var titulo = "Reporte Global: "
-    exportCSVFile(headers,datos,fecha, titulo);
+    if (tables.successful){
+        var arrStudent = tables.arrStudent;
+        var arrBook = tables.arrBook;
+        var arrLoan = tables.arrLoan;
+        var titulo = " ";
+
+
+        var reporte = exportCSVFile(headersStudents,arrStudent,fecha,titulo);
+        reporte += exportCSVFile(headersLoans,arrBook,fecha,titulo);
+        reporte += exportCSVFile(headersBooks,arrLoan,fecha,titulo);
+
+        exportGlobalCSVFile("Reporte Global",reporte);
+    }
+
 
 }
 
@@ -299,7 +322,31 @@ function exportCSVFile(headers, items, fileName, titulo) {
      }
     }
     
-   }
+}
+
+
+function exportGlobalCSVFile(fileName,rows) {
+    
+   const exportName = fileName + ".txt" || "export.txt";
+   
+   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    if (navigator.msSaveBlob) {
+     navigator.msSaveBlob(blob, exportName);
+    } else {
+     const link = document.createElement("a");
+     if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", exportName);
+      link.style.visibility = "hidden";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+     }
+    }
+    
+}
 
 
 buildViewloans ();
+buildTables();
