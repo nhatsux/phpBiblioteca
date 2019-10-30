@@ -42,7 +42,7 @@ if ($arrRS){
 			"arrBook":[';
 		
 		//Recorrer arreglo para llenar objetos
-		foreach($arrRL as $arrayBook){
+		foreach($arrRS as $arrayBook){
 			$sCadJson = $sCadJson.'{
                     "ISBN": "'.$arrayBook[0].'",
                     "titulo": "'.$arrayBook[1].'",
@@ -65,7 +65,7 @@ if ($arrRS){
 			"arrLoan":[';
 		
 		//Recorrer arreglo para llenar objetos
-		foreach($arrRP as $arrayLoan){
+		foreach($arrRS as $arrayLoan){
 			$sCadJson = $sCadJson.'{
                     "matricula": "'.$arrayLoan[0].'",
                     "ISBN": "'.$arrayLoan[1].'",
