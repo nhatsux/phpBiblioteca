@@ -8,7 +8,7 @@ class DataAccess{
     function conectar(){
         $Ret = false;
         try {
-            $this->Conexion = pg_connect("host=salt.db.elephantsql.com port=5432 user=mrkdxhnn password=kTwE8QTsC4n9HhuBDKSg6M4fL4e_THhS dbname=mrkdxhnn", PGSQL_CONNECT_FORCE_NEW);
+            $this->Conexion = pg_connect("host=localhost port=5432 user=postgres password=qwerty123 dbname=biblioteca", PGSQL_CONNECT_FORCE_NEW); 
         } catch (Exception $e){
             throw $e;
         }

@@ -52,6 +52,15 @@ if (!isset($_SESSION["active"]) ){
     </nav>
     <div class="table">
         <h4>Lista de Prestamos</h4>
+        
+        <div id="filters">
+            <form id="customFilter">
+                <div id="controls">
+                </div>
+                <button type="button" class="btn btn-light" id="btnReporte">Descargar Reporte</button>
+                <button type="button" class="btn btn-light" id="btnFilter">Buscar</button>
+            </form>
+        </div>
          <table class ="table" id="tableLoans">
              <thead>
                  <tr>
@@ -69,7 +78,10 @@ if (!isset($_SESSION["active"]) ){
                  
              </tbody>
          </table>
-         <button type="button" class="btn btn-success" id="addLoan" data-toggle="modal" data-target="#addModalLoan"> 
+         <button type="button" class="btn btn-link" id="btnShowFilter"> 
+           <img title="Filtrar" src="../src/image/icons/filter.png">
+         </button>  
+        <button type="button" class="btn btn-success" id="addLoan" data-toggle="modal" data-target="#addModalLoan"> 
           <img   title="Agregar un Préstamo nuevo" src="../src/image/icons/add.svg">
         </button>  
     </div>
