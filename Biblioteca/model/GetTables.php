@@ -7,20 +7,9 @@ $sQuery ="";
 if($oAccesoDatos ->conectar()){
     $request_body = file_get_contents('php://input');
     $data = json_decode($request_body);
-<<<<<<< HEAD
     $sQuery = "SELECT matricula,nombre,apepaterno,apematerno,activo,vigencia,id_carrera FROM estudiante LIMIT 2";
-    
     $arrRS = $oAccesoDatos -> ejecutarConsulta($sQuery);
    
-=======
-    $sQueryS = "SELECT estudiante.* FROM estudiante LIMIT 2";
-    $arrRS = $oAccesoDatos -> ejecutarConsulta($sQueryS);
-    $sQueryL = "SELECT  libro.* FROM  libro LIMIT 2";
-    $arrRL = $oAccesoDatos -> ejecutarConsulta($sQueryL);
-    $sQueryP = "SELECT  prestamo.* FROM  prestamo LIMIT 2";
-    $arrRP = $oAccesoDatos -> ejecutarConsulta($sQueryP);
-    $oAccesoDatos->desconectar();
->>>>>>> dbc6afcbffdde3fef6a431b38851627f7b975dcd
 }
 if ($arrRS){
     $sCadJson = 
