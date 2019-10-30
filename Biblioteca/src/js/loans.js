@@ -216,48 +216,22 @@ btnReporte.onclick = () =>{
     estado: "Estado",
     tipo : "Tipo"
     }
-    var fecha = new Date();
+    var fecha = new Date().toLocaleDateString("es-ES");
     
     var datos = loansFilter ? loansFilter.map(l=>l) : responseLoans.arrLoans.map(l=>l);
     var titulo = "Reporte de Prestamos: " + (filtro ? JSON.stringify(filtro) : "")
-    exportCSVFile(headers,datos,fecha, titulo);
+    exportCSVFile(headers,datos,"Reporte filtrado - " + fecha,titulo);
 
 }
 
 btnReporteGlobal.onclick = () =>{
-    var headersStudents = {
-        matricula:    "matricula",
-        nombre:       "nombre",
-        apePaterno:   "apePaterno",
-        apeMaterno:   "apeMaterno",
-        activo:       "activo",
-        vigencia:     "vigencia",
-        id_carrera:      "id_carrera",
-    }
+    var headersStudents = "Matricula,Nombre,Apellido Paterno,Apellido Materno,Activo,Vigencia,Id Carrera";
 
-    var headersLoans = {
-        matricula:"matricula",
-        ISBN :"ISBN",
-        refrendo : "Refrendo",
-        fechaIni :"Fecha Inicio",
-        fechaFin :"Fecha Fin",
-        estado: "Estado",
-        id_deuda: "id_deuda",
-        tipo : "Tipo"
-    }
+    var headersLoans = "Matricula,ISBN,Refrendo,Fecha Inicio,Fecha Fin,Estado,Tipo";
 
-    var headersBooks = {
-        ISBN :"ISBN",
-        titulo : "titulo",
-        autor :"autor",
-        num_page : "num_page",
-        encuadernacion :"encuadernacion",
-        editorial :"editorial",
-        lengua :"lengua",
-        portada :"portada",
-        cantidad :"cantidad"
-    }
-    var fecha = new Date();
+    var headersBooks = "ISBN,Titulo,Autor,Paginas,Encuadernacion,Editorial,Lengua,Portada,Cantidad";
+
+    var fecha = new Date().toLocaleDateString("es-ES");
     
     if (tables.successful){
         var arrStudent = tables.arrStudent;
@@ -266,11 +240,11 @@ btnReporteGlobal.onclick = () =>{
         var titulo = " ";
 
 
-        var reporte = exportCSVFile(headersStudents,arrStudent,fecha,titulo);
-        reporte += exportCSVFile(headersLoans,arrBook,fecha,titulo);
-        reporte += exportCSVFile(headersBooks,arrLoan,fecha,titulo);
+        var reporte = convertToCSV(arrStudent,headersStudents) + " \r\n";
+        reporte += convertToCSV(arrBook,headersBooks) + " \r\n";
+        reporte += convertToCSV(arrLoan,headersLoans) + " \r\n";
 
-        exportGlobalCSVFile("Reporte Global",reporte);
+        exportGlobalCSVFile("Reporte Global - " + fecha,reporte);
     }
 
 
@@ -279,7 +253,7 @@ btnReporteGlobal.onclick = () =>{
 
 function convertToCSV(objArray, titulo) {
     const array = typeof objArray != "object" ? JSON.parse(objArray) : objArray;
-    let str = titulo + " \r\n\r\n";
+    let str = titulo + " \r\n";
    
    for (let i = 0; i < array.length; i++) {
      let line = "";
@@ -325,7 +299,7 @@ function exportCSVFile(headers, items, fileName, titulo) {
 }
 
 
-function exportGlobalCSVFile(fileName,rows) {
+function exportGlobalCSVFile(fileName,csv) {
     
    const exportName = fileName + ".txt" || "export.txt";
    
