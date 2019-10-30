@@ -57,7 +57,7 @@ async function getStudentsList(){
 
 async function editStudent (data){
     return new Promise(async resolve =>{
-       const url = '../model/editStudents.php';
+       const url = '../model/EditStudents.php';
        try {
         const response = await fetch(url, {
           method: 'POST', // or 'PUT'
@@ -76,7 +76,7 @@ async function editStudent (data){
 
 async function addAlumn(data){
     return new Promise(async resolve =>{
-      const url = '../model/addStudents.php';
+      const url = '../model/AddStudents.php';
       try {
       const response = await fetch(url, {
         method: 'POST', // or 'PUT'
