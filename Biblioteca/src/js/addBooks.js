@@ -313,10 +313,11 @@ async function searchNumControl(){
 
 }
 
-function resultLoan(activo,vigencia){
+async function resultLoan(activo,vigencia){
     var listLoans = [];
     resultSearchStudent.innerHTML += "<hr>"
-    listLoans = getLoan();
+    listLoans = await findLoandByStudent(numC.value);
+    console.log(listLoans);
     if (listLoans.length >0){
         resultSearchStudent.innerHTML += "<p>Lista de prestamos</p>";
         console.log(tableLoan.classList);
@@ -337,14 +338,6 @@ function resultLoan(activo,vigencia){
     }
    
 }
-
-function getLoan(){
-   findLoandByStudent(numC.value);
-
-}
-
-
-
 
 cancelLoan1.onclick = ()=>{
     console.log("lol")

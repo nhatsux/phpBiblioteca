@@ -1,6 +1,6 @@
 async function findLoandByStudent (matricul){
     return new Promise (async resolve =>{
-        const url = '../model/FindLoansByStudent.php';
+        const url = '../model/GetLoanM.php';
         const data = {matricula: matricul}
         try{
             const response = await fetch(url, {
@@ -10,8 +10,8 @@ async function findLoandByStudent (matricul){
                   'Content-Type': 'application/json'
                 }
               });
-            //const json = await response.json();
-            //return resolve(json);
+            const json = await response.json();
+            return resolve(json.arrLoan);
         }catch (error){
             console.error('Error:', error);
         }
