@@ -38,13 +38,13 @@
         </div>
         <div>
         
-            <table id="tableLoan" class="table table-bordered hide">
+            <table id="tableLoan" class="table table-bordered hide" style="border-collapse: collapse;">
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Titulo</th>
-                        <th>Fecha inicio</th>
-                        <th>Fecha final</th>
+                        <th>Fecha entrega</th>
+                        <th>#</th>
+                        <th>Ope</th>
                     </tr>
                 </thead>
                 <tbody id="contentLoanTable" > 

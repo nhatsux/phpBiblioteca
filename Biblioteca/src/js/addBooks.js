@@ -22,7 +22,11 @@ container.onclick= ()=> {
              ISBN.disabled = true;
             break;
         case "loan":
+            resultSearchStudent.innerHTML ="";
+            contentLoanTable.innerHTML = "";
+            tableLoan.classList.add("hide");
             loanBook();
+           
         break;        
         default:
             break;
@@ -326,7 +330,10 @@ async function resultLoan(activo,vigencia){
             contentLoanTable.innerHTML +=
             `
             <tr> 
-                <td>${loan}</td>
+                <td><small>${loan.titulo.substring(0,25)}...</small></td>
+                <td><small>${loan.fechaEntrega}</small></td>
+                <td><small>${loan.refrendo}</small></td>
+                <td><a class="edit btn btn-primary btn-sm " href="#"></a></small></td>
             </tr>
             `
         });
