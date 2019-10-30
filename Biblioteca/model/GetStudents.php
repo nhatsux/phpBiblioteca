@@ -6,9 +6,9 @@ $arrRS = null;
 if($oAccesoDatos ->conectar()){
     $request_body = file_get_contents('php://input');
     $data = json_decode($request_body);
-    $sQuery= " SELECT t1.matricula,t1.nombre AS estudiante,t1.apepaterno,t1.apematerno,t1.activo,t1.vigencia,t2.nombre
+    $sQuery= " SELECT t1.matricula,t1.nombre AS estudiante,t1.apepaterno,t1.apematerno,t1.activo,t1.vigencia,t2.nombre,t1.id_carrera
                   FROM estudiante t1, carrera t2
-                  WHERE  t2.id_carrera = t1.id_carrera";
+                  WHERE  t2.id_carrera = t1.id_carrera ORDER BY estudiante";
     $arrRS = $oAccesoDatos -> ejecutarConsulta($sQuery);
     $oAccesoDatos->desconectar();
 }
@@ -27,7 +27,8 @@ if ($arrRS){
                     "apeMaterno":"'.$arrayBook[3].'",
                     "activo":'.($arrayBook[4]=="t"?1:0).',
                     "vigencia":'.($arrayBook[5]=="t"?1:0).',
-                    "carrera": "'.$arrayBook[6].'"
+                    "carrera": "'.$arrayBook[6].'",
+                    "id_carrera":'.$arrayBook[7].'
 					},';
 		}
 		//Sobra una coma, eliminarla

@@ -65,7 +65,7 @@ if (!isset($_SESSION["active"]) ){
                  
              </tbody>
          </table>
-         <button type="button" class="btn btn-success" id="addBook" data-toggle="modal" data-target="#addModalBook"> 
+         <button type="button" class="btn btn-success" id="addStudent" data-toggle="modal" data-target="#addModalStudent"> 
           <img   title="Agregar un libro nuevo" src="../src/image/icons/add.svg">
         </button>  
     </div>

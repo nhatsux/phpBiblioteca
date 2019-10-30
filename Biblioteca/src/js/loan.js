@@ -23,7 +23,7 @@ async function findLoandByStudent (matricul){
 async function insertNewLoan (newLoan){
     
     return new Promise (async resolve =>{
-        const url ='../model/insertLoan.php';
+        const url ='../model/AddLoan.php';
         try{
             const response = await fetch(url, {
                 method: 'POST', // or 'PUT'
@@ -32,8 +32,8 @@ async function insertNewLoan (newLoan){
                   'Content-Type': 'application/json'
                 }
               });
-            //const json = await response.json();
-            //return resolve(json); 
+            const json = await response.json();
+            return resolve(json); 
         }catch(error){
             console.error('Error',error)
         }

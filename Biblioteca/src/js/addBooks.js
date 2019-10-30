@@ -241,6 +241,7 @@ function loanBook(){
     authorBookLoan.innerHTML = `<b>Autor:</b> ${item_modal.book.author}`
     amountBookLoan.innerHTML = `<b>Disponibles:</b> ${item_modal.book.amount}`
     titleBookLoan.dataset.isbn = `${item_modal.book.ISBN}`;
+    amountBookLoan.dataset.amount = item_modal.book.amount
 }
 
 searchStudent.onclick = ()=>{
@@ -253,13 +254,20 @@ searchStudent.onclick = ()=>{
 
 async function searchNumControl(){
     
-    var response  = await findStudent (numC.value)
+    var response  = await findStudent (numC.value);
+    await swal(`Buscando alumno ...`, {
+        buttons: false,
+        timer: 1000,
+      })
     console.log(response);
     if (response.successful){
         let msj;
         let bgColorTable;
-        if (amountBookLoan.innerHTML > 3)
+        if ( amountBookLoan.dataset.amount > 3){
             btnLoanM.disabled = false;
+            btnLoanL.disabled = false;
+        }
+            
 
         if (response.student.activo ==1){
             msj= "El alumno tiene una multa pendiente";
@@ -359,13 +367,29 @@ async function insertLoan (tipo){
         ISBN : titleBookLoan.dataset.isbn,
         tipo: tipo
     };
+   
+    var  response = await insertNewLoan(newLoan);
     await swal(`Registrando prestamo ...`, {
         buttons: false,
-        timer: 2000,
+        timer: 1000,
       })
-
-    console.log(newLoan);
-
-    var  response = await insertNewLoan(newLoan);
+    if (response.successful)
+        await swal({
+            title: "Exito",
+            text: `${response.msj}`,
+            icon: "success",
+            button: "Ok",
+            closeOnClickOutside: false,
+            timer: 2000
+            });
+        
+    else 
+    swal({
+        title: "Error",
+        text:  `${response.msj}`,
+        icon: "error",
+        button: "Ok",
+        closeOnClickOutside: false
+        });
 }
 

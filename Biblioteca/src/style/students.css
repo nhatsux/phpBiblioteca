@@ -37,7 +37,7 @@ img {
    
 }
 
-#addBook{
+#addStudent{
     align-items: center;
     border-radius: 50%;
     padding: 0;
@@ -47,6 +47,6 @@ img {
     top:80%;
 }
 
-#addBook img {
+#addStudent img {
     width: 50px;
 }
