@@ -38,7 +38,7 @@ if (!isset($_SESSION["active"]) ){
             <a class="nav-link" href="books.php"><img  src="../src/image/icons/book.png"> Libros</a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="student.php"><img  src="../src/image/icons/student.png"> Alumnos</a>
+            <a class="nav-link" href="#"><img  src="../src/image/icons/student.png"> Alumnos</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="loans.php"><img  src="../src/image/icons/loan.png"> Prestamos</a>
