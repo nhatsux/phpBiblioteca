@@ -10,11 +10,22 @@ $msj = "";
 if ($_SESSION["active"]){
     if($oAccesoDatos ->conectar()){
         $sQuery =" UPDATE estudiante
+<<<<<<< HEAD
                    SET nombre =  '".$data ->nombre."'
                        ,apePaterno =  '".$data ->apePaterno."'
                        ,apeMaterno =  '".$data ->apeMaterno."'
                        ,vigencia =  '".$data ->vigencia."'
                        ,id_carrera =  ".$data ->id_carrera."
+=======
+                   SET matricula = '".$data -> matricula ."'
+                       ,nombre =  '".$data ->nombre."'
+                       ,apePaterno =  '".$data ->apePaterno."''
+                       ,apeMaterno =  '".$data ->apeMaterno."'
+                       ,activo =  '".$data ->activo."'
+                       ,vigencia =  '".$data ->vigencia."'
+                       ,id_carrera =  ".$data ->id_carrera."
+                       
+>>>>>>> e0943d4d46d9e1769a0e760df15cd4a2cdf522fc
                        WHERE matricula =  '".$data ->matricula."'";
         $response =  $oAccesoDatos -> ejecutarComando($sQuery);
         if ($response >0)
@@ -31,4 +42,8 @@ $sCadJson =
     }';
 header('Content-type: application/json');
 echo $sCadJson;
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> e0943d4d46d9e1769a0e760df15cd4a2cdf522fc

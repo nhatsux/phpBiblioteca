@@ -41,4 +41,8 @@ $sCadJson =
         "msj" : "'.$msj.'"
     }';
 header('Content-type: application/json');
+<<<<<<< HEAD
 echo $sCadJson;
+=======
+echo $sCadJson;
+>>>>>>> e0943d4d46d9e1769a0e760df15cd4a2cdf522fc
