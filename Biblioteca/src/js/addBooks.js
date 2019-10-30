@@ -258,16 +258,19 @@ async function searchNumControl(){
     if (response.successful){
         let msj;
         let bgColorTable;
-        btnLoanM.disabled = false;
+        if (amountBookLoan.innerHTML > 3)
+            btnLoanM.disabled = false;
 
         if (response.student.activo ==1){
             msj= "El alumno tiene una multa pendiente";
             bgColorTable= "bg-danger";
             btnLoanM.disabled = true;
+            btnLoanL.disabled = true;
         }else if (!response.student.vigencia){
             msj= "Sin vigencia en el sistema";
             bgColorTable= "bg-warning";
             btnLoanM.disabled = true;
+            btnLoanL.disabled = true;
         }else {
             msj= "Aceptado";
             bgColorTable= "bg-success";
@@ -342,10 +345,19 @@ cancelLoan1.onclick = ()=>{
     tableLoan.classList.add("hide");
 }
 
-btnLoanM.onclick = async () =>{
+btnLoanM.onclick =() =>{
+    insertLoan(0);
+}
+
+btnLoanL.onclick =() =>{
+    insertLoan(1);
+}
+
+async function insertLoan (tipo){
     let newLoan = {
         matricula: numC.value,
-        ISBN : titleBookLoan.dataset.isbn
+        ISBN : titleBookLoan.dataset.isbn,
+        tipo: tipo
     };
     await swal(`Registrando prestamo ...`, {
         buttons: false,

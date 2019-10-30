@@ -58,7 +58,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" id="cancelLoan1" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" id="btnLoanM" disabled>Prestar</button>
+        <button type="button" class="btn btn-primary" id="btnLoanL" disabled>Prestar Local</button>
+        <button type="button" class="btn btn-primary" id="btnLoanM" disabled>Prestar Domicilio</button>
       </div>
     </div>
   </div>
