@@ -321,7 +321,8 @@ async function resultLoan(activo,vigencia){
     var listLoans = [];
     resultSearchStudent.innerHTML += "<hr>"
     listLoans = await findLoandByStudent(numC.value);
-    console.log(listLoans);
+    restrictionLoan(listLoans);
+
     if (listLoans.length >0){
         resultSearchStudent.innerHTML += "<p>Lista de prestamos</p>";
         console.log(tableLoan.classList);
@@ -333,7 +334,7 @@ async function resultLoan(activo,vigencia){
                 <td><small>${loan.titulo.substring(0,25)}...</small></td>
                 <td><small>${loan.fechaEntrega}</small></td>
                 <td><small>${loan.refrendo}</small></td>
-                <td><a class="edit btn btn-primary btn-sm " href="#"></a></small></td>
+                <td><small><a class="opeLoan btn btn-primary btn-sm " href="#"> </a></small></td>
             </tr>
             `
         });
@@ -346,6 +347,18 @@ async function resultLoan(activo,vigencia){
    
 }
 
+function restrictionLoan(array){
+    array.forEach(loan => {
+        if ( loan.ISBN === titleBookLoan.dataset.isbn)
+            btnLoanM.innerHTML = "Refrendo";
+        if(loan.refrendo >=3){
+            btnLoanM.disabled = true;
+            btnLoanL.disabled = true;
+        }
+            
+    });
+}
+
 cancelLoan1.onclick = ()=>{
     console.log("lol")
     resultSearchStudent.innerHTML ="";
@@ -354,7 +367,10 @@ cancelLoan1.onclick = ()=>{
 }
 
 btnLoanM.onclick =() =>{
-    insertLoan(0);
+    if (btnLoanM.innerHTML ==="Prestar Domicilio")
+        insertLoan(0);
+    else if(btnLoanM.innerHTML ==="Refrendo")
+        console.log("Refrendo...");
 }
 
 btnLoanL.onclick =() =>{
