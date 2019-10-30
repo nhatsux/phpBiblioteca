@@ -1,5 +1,8 @@
 import {getLoansList} from './loansData.js'
 var responseLoans;
+var loansFilter;
+var filtro;
+var i = 0;
 async function buildViewloans (){
     responseLoans= await getLoansList();
     builContentTable(responseLoans.arrLoans);
@@ -110,7 +113,7 @@ function builFiltersForm(listLoans){
 }
 
 btnFilter.onclick = () =>{
-    var filtro = {};
+    filtro = {};
     var frm = document.forms["customFilter"];
 
     filtro["matricula"] =   frm["matricula"].value;
@@ -150,6 +153,7 @@ btnFilter.onclick = () =>{
   
         console.log(applyFilter);
         builContentTable(applyFilter);
+        loansFilter = applyFilter;
     }
 
 
@@ -196,5 +200,106 @@ btnShowFilter.onclick = () =>{
     filters.classList.toggle('openFilter');
     tableLoans.classList.toggle('tableOpenFilter');
 }
+
+btnReporte.onclick = () =>{
+    var headers = {
+    matricula: "Matricula",
+    ISBN :"ISBN",
+    refrendo : "Refrendo",
+    fechaIni :"Fecha Inicio",
+    fechaFin :"Fecha Fin",
+    estado: "Estado",
+    tipo : "Tipo"
+    }
+    var fecha = new Date();
+    
+    var datos = loansFilter ? loansFilter.map(l=>l) : responseLoans.arrLoans.map(l=>l);
+    var titulo = "Reporte de Prestamos: " + (filtro ? JSON.stringify(filtro) : "")
+    exportCSVFile(headers,datos,fecha, titulo);
+
+}
+
+btnReporteGlobal.onclick = () =>{
+    var headers = {
+        matricula:    "matricula",
+        nombre:       "nombre",
+        apePaterno:   "apePaterno",
+        apeMaterno:   "apeMaterno",
+        activo:       "activo",
+        vigencia:     "vigencia",
+        carrera:      "carrera",
+
+        ISBN :"ISBN",
+        refrendo : "Refrendo",
+        fechaIni :"Fecha Inicio",
+        fechaFin :"Fecha Fin",
+        estado: "Estado",
+        tipo : "Tipo",
+
+        title : "title",
+        author :"author",
+        num_page : "num_page",
+        biding :"biding",
+        editorial :"editorial",
+        language :"language",
+        cover :"cover",
+        amount :"amount"
+    }
+    var fecha = new Date();
+    
+    var datos = loansFilter ? loansFilter.map(l=>l) : responseLoans.arrLoans.map(l=>l);
+    var titulo = "Reporte Global: "
+    exportCSVFile(headers,datos,fecha, titulo);
+
+}
+
+
+function convertToCSV(objArray, titulo) {
+    const array = typeof objArray != "object" ? JSON.parse(objArray) : objArray;
+    let str = titulo + " \r\n\r\n";
+   
+   for (let i = 0; i < array.length; i++) {
+     let line = "";
+     for (let index in array[i]) {
+      if (line != "") line += ",";
+   
+   line += array[i][index];
+     }
+   
+   str += line + "\r\n";
+    }
+   
+   return str;
+}
+
+function exportCSVFile(headers, items, fileName, titulo) {
+    if (headers) {
+     items.unshift(headers);
+    }
+   
+   const jsonObject = JSON.stringify(items);
+   
+   const csv = convertToCSV(jsonObject, titulo);
+   
+   const exportName = fileName + ".txt" || "export.txt";
+   
+   const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    if (navigator.msSaveBlob) {
+     navigator.msSaveBlob(blob, exportName);
+    } else {
+     const link = document.createElement("a");
+     if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute("href", url);
+      link.setAttribute("download", exportName);
+      link.style.visibility = "hidden";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+     }
+    }
+    
+   }
+
 
 buildViewloans ();
