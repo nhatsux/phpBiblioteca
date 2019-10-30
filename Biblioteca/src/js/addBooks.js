@@ -1,5 +1,6 @@
 import {item_modal,buildViewBooks} from './books.js'
 import {findStudent} from './studentData.js'
+import {findLoandByStudent, insertNewLoan} from './loan.js';
 
 
 imgCover.onclick  = ()=> { cover.click()}
@@ -239,6 +240,7 @@ function loanBook(){
     titleBookLoan.innerHTML  = `<b>Titulo:</b> ${item_modal.book.title}`
     authorBookLoan.innerHTML = `<b>Autor:</b> ${item_modal.book.author}`
     amountBookLoan.innerHTML = `<b>Disponibles:</b> ${item_modal.book.amount}`
+    titleBookLoan.dataset.isbn = `${item_modal.book.ISBN}`;
 }
 
 searchStudent.onclick = ()=>{
@@ -255,13 +257,17 @@ async function searchNumControl(){
     console.log(response);
     if (response.successful){
         let msj;
-        let bgColorTable
-        if (response.student.activo){
+        let bgColorTable;
+        btnLoanM.disabled = false;
+
+        if (response.student.activo ==1){
             msj= "El alumno tiene una multa pendiente";
             bgColorTable= "bg-danger";
+            btnLoanM.disabled = true;
         }else if (!response.student.vigencia){
             msj= "Sin vigencia en el sistema";
             bgColorTable= "bg-warning";
+            btnLoanM.disabled = true;
         }else {
             msj= "Aceptado";
             bgColorTable= "bg-success";
@@ -297,8 +303,9 @@ async function searchNumControl(){
 }
 
 function resultLoan(activo,vigencia){
+    var listLoans = [];
     resultSearchStudent.innerHTML += "<hr>"
-    var listLoans = getLoan();
+    listLoans = getLoan();
     if (listLoans.length >0){
         resultSearchStudent.innerHTML += "<p>Lista de prestamos</p>";
         console.log(tableLoan.classList);
@@ -321,8 +328,11 @@ function resultLoan(activo,vigencia){
 }
 
 function getLoan(){
-    return [1,2,3,4,5,6];
+   findLoandByStudent(numC.value);
+
 }
+
+
 
 
 cancelLoan1.onclick = ()=>{
@@ -330,5 +340,20 @@ cancelLoan1.onclick = ()=>{
     resultSearchStudent.innerHTML ="";
     contentLoanTable.innerHTML = "";
     tableLoan.classList.add("hide");
+}
+
+btnLoanM.onclick = async () =>{
+    let newLoan = {
+        matricula: numC.value,
+        ISBN : titleBookLoan.dataset.isbn
+    };
+    await swal(`Registrando prestamo ...`, {
+        buttons: false,
+        timer: 2000,
+      })
+
+    console.log(newLoan);
+
+    var  response = await insertNewLoan(newLoan);
 }
 
