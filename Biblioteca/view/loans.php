@@ -58,6 +58,7 @@ if (!isset($_SESSION["active"]) ){
                 <div id="controls">
                 </div>
                 <button type="button" class="btn btn-light" id="btnReporte">Descargar Reporte</button>
+                <button type="button" class="btn btn-light" id="btnReporteGlobal">Descargar Reporte Global</button>
                 <button type="button" class="btn btn-light" id="btnFilter">Buscar</button>
             </form>
         </div>
