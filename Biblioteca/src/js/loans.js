@@ -19,7 +19,7 @@ function builContentTable(listLoans){
                 <td>${loan.fechaIni}</td>
                 <td>${loan.fechaFin}</td>
                 <td>${loan.estado ? "Activo" : "Adeudo"}</td>
-                <td>${loan.tipo}</td>
+                <td>${loan.tipo ? "Local" : "A Casa"}</td>
                 <td> 
                     <div class="row">
                         <div class="col-6">
@@ -40,7 +40,8 @@ function filterLoans (filter){
       || loan.ISBN.includes(filter.trim()) 
       || loan.fechaIni.includes(filter.trim())
       || loan.fechaFin.includes(filter.trim())
-      || loan.estado == (filter.trim() == "Activo" ? 1 : filter.trim() == "Adeudo" ? 0 : NaN)
+      || loan.estado == (filter.trim().toLowerCase() == "activo" ? 1 : filter.trim().toLowerCase() == "adeudo" ? 0 : NaN)
+      || loan.tipo == (filter.trim().toLowerCase() == "local" ? 1 : filter.replace(/ /g,"").toLowerCase() == "acasa" ? 0 : NaN)
     })
   }
 
