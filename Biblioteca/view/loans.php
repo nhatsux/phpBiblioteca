@@ -11,16 +11,16 @@ if (!isset($_SESSION["active"]) ){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Estudiantes</title>
+    <title>Prestamos</title>
     
     <link rel="stylesheet" href="../src/bootstrap.min.css">    
     <link rel="stylesheet" href="../src/style/menu.css">
-    <link rel="stylesheet" href="../src/style/students.css">
+    <link rel="stylesheet" href="../src/style/loans.css">
     <script src="../src/jquery-3.3.1.slim.min.js"></script>
     <script src="../src/bootstrap.min.js"></script>
     <script src="../src/popper.min.js"></script>
     <script src="../src/sweetalert.min.js"></script>
-    <script type="module" src="../src/js/students.js"  type="text/javascript"></script>
+    <script type="module" src="../src/js/loans.js"  type="text/javascript"></script>
 </head>
 <body>
    
@@ -37,10 +37,10 @@ if (!isset($_SESSION["active"]) ){
         
             <a class="nav-link" href="books.php"><img  src="../src/image/icons/book.png"> Libros</a>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="student.php"><img  src="../src/image/icons/student.png"> Alumnos</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
             <a class="nav-link" href="loans.php"><img  src="../src/image/icons/loan.png"> Prestamos</a>
         </li>
         </ul>
@@ -51,24 +51,40 @@ if (!isset($_SESSION["active"]) ){
     </div>
     </nav>
     <div class="table">
-        <h4>Lista de estudiantes</h4>
-         <table class ="table" id="tableStudents">
+        <h4>Lista de Prestamos</h4>
+        
+        <div id="filters">
+            <form id="customFilter">
+                <div id="controls">
+                </div>
+                <button type="button" class="btn btn-light" id="btnReporte">Descargar Reporte</button>
+                <button type="button" class="btn btn-light" id="btnFilter">Buscar</button>
+            </form>
+        </div>
+         <table class ="table" id="tableLoans">
              <thead>
                  <tr>
                     <th>Matricula</th>
-                    <th>Nombre Completo</th>
-                    <th>Carrera</th>
+                    <th>ISBN</th>
+                    <th>Refrendo</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Estado</th>
+                    <th>Tipo</th>
                     <th>Operacion</th>
                  </tr>
              </thead>
-             <tbody id="tableStudentBody">
+             <tbody id="tableLoansBody">
                  
              </tbody>
          </table>
-         <button type="button" class="btn btn-success" id="addStudent" data-toggle="modal" data-target="#addModalStudent"> 
-          <img   title="Agregar un libro nuevo" src="../src/image/icons/add.svg">
+         <button type="button" class="btn btn-link" id="btnShowFilter"> 
+           <img title="Filtrar" src="../src/image/icons/filter.png">
+         </button>  
+        <button type="button" class="btn btn-success" id="addLoan" data-toggle="modal" data-target="#addModalLoan"> 
+          <img   title="Agregar un Préstamo nuevo" src="../src/image/icons/add.svg">
         </button>  
     </div>
-    <?php include ("addStudent.php"); ?> 
+
 </body>
 </html>

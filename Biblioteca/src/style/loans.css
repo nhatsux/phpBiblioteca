@@ -1,0 +1,84 @@
+.navbar{
+    position:fixed;
+    z-index:1;
+    width:100%;
+}
+
+.hide {
+    display: none;
+}
+img {
+    width: 20px;
+}
+.nav-link{
+    font-size: 20px;
+}
+
+.table{
+    position: absolute;
+    top: 10%;
+    text-align: center;
+    
+}
+
+#tableLoans {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 4%;
+    text-align: center;
+}
+
+.edit {
+    width: 40px;
+    
+}
+.loan{
+    width: 40px;
+   
+}
+
+
+#addLoan{
+    align-items: center;
+    border-radius: 50%;
+    padding: 0;
+    right: 3%;
+    z-index:1;
+    position: fixed;;
+    top:80%;
+}
+
+#btnShowFilter {
+    align-items: center;
+    border-radius: 50%;
+    padding: 0;
+    right: 10%;
+    z-index:1;
+    position: fixed;
+    top:10%;
+}
+
+#btnShowFilter  img {
+    width: 25px;
+}
+
+#addLoan  img {
+    width: 50px;
+}
+
+
+#filters {
+    display: none;
+}
+
+#filters.openFilter {
+    margin-top: 4%;
+    margin-left: 5%;
+    width: 10%;
+    display: block;
+}
+
+#tableLoans.tableOpenFilter {
+    margin-left: 16%;
+    margin-top: 0%;
+}
