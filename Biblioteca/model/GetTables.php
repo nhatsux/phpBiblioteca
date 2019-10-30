@@ -6,8 +6,12 @@ $arrRS = null;
 if($oAccesoDatos ->conectar()){
     $request_body = file_get_contents('php://input');
     $data = json_decode($request_body);
-    $sQuery = "SELECT estudiante.*, libro.*, prestamo.* FROM estudiante, libro, prestamo LIMIT 2";
-    $arrRS = $oAccesoDatos -> ejecutarConsulta($sQuery);
+    $sQueryS = "SELECT estudiante.* FROM estudiante LIMIT 2";
+    $arrRS = $oAccesoDatos -> ejecutarConsulta($sQueryS);
+    $sQueryL = "SELECT  libro.* FROM  libro LIMIT 2";
+    $arrRL = $oAccesoDatos -> ejecutarConsulta($sQueryL);
+    $sQueryP = "SELECT  prestamo.* FROM  prestamo LIMIT 2";
+    $arrRP = $oAccesoDatos -> ejecutarConsulta($sQueryP);
     $oAccesoDatos->desconectar();
 }
 if ($arrRS){
@@ -38,7 +42,7 @@ if ($arrRS){
 			"arrBook":[';
 		
 		//Recorrer arreglo para llenar objetos
-		foreach($arrRS as $arrayBook){
+		foreach($arrRL as $arrayBook){
 			$sCadJson = $sCadJson.'{
                     "ISBN": "'.$arrayBook[0].'",
                     "titulo": "'.$arrayBook[1].'",
@@ -61,7 +65,7 @@ if ($arrRS){
 			"arrLoan":[';
 		
 		//Recorrer arreglo para llenar objetos
-		foreach($arrRS as $arrayLoan){
+		foreach($arrRP as $arrayLoan){
 			$sCadJson = $sCadJson.'{
                     "matricula": "'.$arrayLoan[0].'",
                     "ISBN": "'.$arrayLoan[1].'",
