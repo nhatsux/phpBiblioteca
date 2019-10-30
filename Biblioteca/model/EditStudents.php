@@ -17,6 +17,7 @@ if ($_SESSION["active"]){
                        ,id_carrera =  ".$data ->id_carrera."
                        WHERE matricula =  '".$data ->matricula."'";
         $response =  $oAccesoDatos -> ejecutarComando($sQuery);
+        $oAccesoDatos -> desconectar();
         if ($response >0){
             $response = true;
             $msj ="Actualizado exitosamente";

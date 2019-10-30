@@ -14,6 +14,7 @@ if ($_SESSION["active"]){
                   WHERE t1.matricula = '".$data->num_control."' 
                   AND t2.id_carrera = t1.id_carrera";
         $response = $oAccesoDatos -> ejecutarConsulta($sQuery);
+        $oAccesoDatos -> desconectar();
         if (sizeof($response)> 0)
             $msj =true;
         else {

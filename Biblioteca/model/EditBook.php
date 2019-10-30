@@ -20,6 +20,7 @@ if ($_SESSION["active"]){
                        ,cantidad =  ".$data ->amount."
                        WHERE isbn =  '".$data ->ISBN."'";
         $response =  $oAccesoDatos -> ejecutarComando($sQuery);
+        $oAccesoDatos -> desconectar();
         if ($response >0)
             $msj ="Actualizado exitosamente";
         else 
