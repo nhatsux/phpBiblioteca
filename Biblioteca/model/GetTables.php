@@ -3,12 +3,14 @@ include_once("DataAccess.php");
 $oAccesoDatos=new DataAccess();
 $sCadJson="";
 $arrRS = null;
+$sQuery ="";
 if($oAccesoDatos ->conectar()){
     $request_body = file_get_contents('php://input');
     $data = json_decode($request_body);
-    $sQuery = "SELECT estudiante.*, libro.*, prestamo.* FROM estudiante, libro, prestamo LIMIT 2";
+    $sQuery = "SELECT matricula,nombre,apepaterno,apematerno,activo,vigencia,id_carrera FROM estudiante LIMIT 2";
+    
     $arrRS = $oAccesoDatos -> ejecutarConsulta($sQuery);
-    $oAccesoDatos->desconectar();
+   
 }
 if ($arrRS){
     $sCadJson = 
@@ -23,17 +25,19 @@ if ($arrRS){
                     "nombre": "'.$arrayStudent[1].'",
                     "apePaterno": "'.$arrayStudent[2].'",
                     "apeMaterno": "'.$arrayStudent[3].'",
-                    "activo": '.$arrayStudent[4].'",
-                    "vigencia": '.$arrayStudent[5].',
+                    "activo": '.($arrayStudent[4]=="t"?1:0).',
+                    "vigencia": '.($arrayStudent[5]=="t"?1:0).',
                     "id_carrera": '.$arrayStudent[6].'
 					},';
-		}
+        }
+        $sQuery = "SELECT isbn,titulo,autor,num_page,encuadernacion,editorial,lengua,portada,cantidad FROM libro LIMIT 2";
+        $arrRS = $oAccesoDatos -> ejecutarConsulta($sQuery);
 		//Sobra una coma, eliminarla
 		$sCadJson = substr($sCadJson,0, strlen($sCadJson)-1);
 		
 		//Colocar cierre de arreglo y de objeto
 		$sCadJson = $sCadJson.'
-			]
+    ],
 
 			"arrBook":[';
 		
@@ -56,10 +60,11 @@ if ($arrRS){
 		
 		//Colocar cierre de arreglo y de objeto
 		$sCadJson = $sCadJson.'
-			]
+    ],
 
 			"arrLoan":[';
-		
+            $sQuery = "SELECT  matricula,isbn,refrendo,fechaini,fechafin,estado,tipo FROM prestamo LIMIT 2";
+            $arrRS = $oAccesoDatos -> ejecutarConsulta($sQuery);
 		//Recorrer arreglo para llenar objetos
 		foreach($arrRS as $arrayLoan){
 			$sCadJson = $sCadJson.'{
@@ -68,15 +73,13 @@ if ($arrRS){
                     "refrendo": '.$arrayLoan[2].',
                     "fechaini": "'.$arrayLoan[3].'",
                     "fechafin": "'.$arrayLoan[4].'",
-                    "estado": '.$arrayLoan[5].',
-                    "id_deuda": '.$arrayLoan[6].',
-                    "tipo": '.$arrayLoan[7].'
-                    
+                    "estado": '.($arrayLoan[5]=="t"?1:0).',
+                    "tipo": '.($arrayLoan[6]=="t"?1:0).'
 					},';
 		}
 		//Sobra una coma, eliminarla
 		$sCadJson = substr($sCadJson,0, strlen($sCadJson)-1);
-		
+		$oAccesoDatos -> desconectar();
 		//Colocar cierre de arreglo y de objeto
 		$sCadJson = $sCadJson.'
 			]
