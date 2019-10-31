@@ -25,7 +25,7 @@ if ($arrRS){
                     "refrendo": '.$arrayLoans[2].',
                     "fechaIni":"'.$arrayLoans[3].'",
                     "fechaFin":"'.$arrayLoans[4].'",
-                    "estado":'.($arrayLoans[5]=="t"?1:0).',
+                    "estado":'.($arrayLoans[5]).',
                     "tipo": '.($arrayLoans[6]=="t"?1:0).'
 					},';
 		}

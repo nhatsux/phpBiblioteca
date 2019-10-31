@@ -21,13 +21,13 @@ function builContentTable(listLoans){
         listLoans.forEach(loan => {
             tableLoansBody.innerHTML+=
             `
-            <tr class = ${loan.estado ? "" : "bg-danger"}> 
+            <tr class = ${loan.estado ==1 ? "" : "bg-danger"}> 
                 <td>${loan.matricula}</td>
                 <td>${loan.ISBN}</td>
                 <td>${loan.refrendo}</td>
                 <td>${loan.fechaIni}</td>
                 <td>${loan.fechaFin}</td>
-                <td>${loan.estado ? "Activo" : "Adeudo"}</td>
+                <td>${loan.estado==1? "Activo" :loan.estado==2?"Adeudo":"Devuelto"}</td>
                 <td>${loan.tipo ? "Local" : "A Casa"}</td>
                 <td> 
                     <div class="row">

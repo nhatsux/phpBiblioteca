@@ -18,7 +18,7 @@ if ($_SESSION["active"]){
         }else {
             $sQuery = "INSERT INTO prestamo (matricula, isbn, refrendo, fechaini, fechafin, estado,tipo)
                                     VALUES ('".$data ->matricula."','".$data ->ISBN."',1,
-                                            now(),now()+'3 day',true,".$data->tipo."::boolean)";
+                                            now(),now()+'3 day',1,".$data->tipo."::boolean)";
             $response =  $oAccesoDatos -> ejecutarComando($sQuery);
             $oAccesoDatos -> desconectar();
             if ($response >0){

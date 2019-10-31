@@ -71,13 +71,13 @@ CREATE TABLE public.libro (
 CREATE TABLE public.prestamo (
                 matricula VARCHAR(150) NOT NULL,
                 ISBN VARCHAR(15) NOT NULL,
-                refrendo SMALLINT NOT NULL,
                 fechaini DATE NOT NULL,
+                refrendo SMALLINT NOT NULL,
                 fechaFin DATE NOT NULL,
-                estado BOOLEAN NOT NULL,
+                estado SMALLINT NOT NULL,
                 id_deuda SMALLINT,
                 tipo BOOLEAN NOT NULL,
-                CONSTRAINT id_prestamo PRIMARY KEY (matricula, ISBN)
+                CONSTRAINT id_prestamo PRIMARY KEY (matricula, ISBN, fechaini)
 );
 COMMENT ON COLUMN public.prestamo.estado IS '0 = sin expirar 1= expiro';
 
@@ -108,6 +108,7 @@ REFERENCES public.libro (ISBN)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
+/*
 -- solo crear usuario una vez 
 CREATE USER bibliotecario WITH PASSWORD 'biblioteca1';
 -- asignacion de permisos al usuario 
@@ -120,7 +121,7 @@ GRANT select, insert, delete, update ON carrera TO bibliotecario;
 
 GRANT all ON deuda_id_deuda_seq_1 TO bibliotecario;
 GRANT all ON admi_id_admi_seq TO bibliotecario;
-GRANT all ON carrera_id_carrera_seq_1 TO bibliotecario;
+GRANT all ON carrera_id_carrera_seq_1 TO bibliotecario;*/
 
 
 

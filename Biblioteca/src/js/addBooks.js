@@ -334,7 +334,7 @@ async function resultLoan(activo,vigencia){
                 <td><small>${loan.titulo.substring(0,25)}...</small></td>
                 <td><small>${loan.fechaEntrega}</small></td>
                 <td><small>${loan.refrendo}</small></td>
-                <td><small><a class="opeLoan btn btn-primary btn-sm " href="#"> </a></small></td>
+                <td><small><a class="opeLoan btn btn-primary btn-sm " href="#">${(loan.activo)?"Deuda":"Devolver"}</a></small></td>
             </tr>
             `
         });
